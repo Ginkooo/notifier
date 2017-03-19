@@ -1,11 +1,29 @@
+#!/usr/bin/python
+
+import os
 import socket
 
 HOST = ''
-PORT = 8757
+PORT = 8753
+
+FILEPATH = '/home/ginko/.nots'
 
 def handle_input(binary_data):
-    text = binary_data.decode('utf-8')
-    print('I got ' + text)
+    text = binary_data.decode('utf-8').strip().replace('\n', '')
+    if text.startswith('GET'):
+        print('getting tasks from file')
+        with open(FILEPATH, 'r') as f:
+            ret = f.read().encode('utf-8')
+    elif text.startswith('CLEAR'):
+        print('Erasing file contents')
+        open(FILEPATH, 'w').close()
+        ret = b''
+    else:
+        print('appending task ' + binary_data.decode('utf-8') + 'to file')
+        with open(FILEPATH, 'a') as f:
+                f.write(text + '\n')
+                ret = b''
+    return ret
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -17,7 +35,6 @@ while True:
     data = conn.recv(1024)
     if not data:
         print('something wrong with data from ' + conn)
-    handle_input(data)
-    response = data + " is being processed".encode('utf-8')
+    response = handle_input(data)
     conn.sendall(response)
     conn.close()
