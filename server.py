@@ -3,8 +3,18 @@
 import os
 import socket
 
-HOST = ''
-PORT = 8751
+CONFIG_FILE = os.getenv('NOTIFY_CONFIG')
+if not CONFIG_FILE:
+    print('There is no NOTIFY_CONFIG env variable')
+    exit()
+
+with open(CONFIG_FILE, 'r') as f:
+    for line in f.readlines():
+        rec = line.strip().split('=')
+        if rec[0] == 'PORT':
+            PORT = int(rec[1])
+        if rec[0] == 'HOST':
+            HOST = rec[1]
 
 FILEPATH = '/home/ginko/.nots'
 
