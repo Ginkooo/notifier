@@ -4,7 +4,7 @@ import os
 import socket
 
 HOST = ''
-PORT = 8755
+PORT = 8751
 
 FILEPATH = '/home/ginko/.nots'
 
@@ -17,6 +17,19 @@ def handle_input(binary_data):
     elif text.startswith('CLEAR'):
         print('Erasing file contents')
         open(FILEPATH, 'w').close()
+        ret = b''
+    elif text.startswith('DEL'):
+        text = text.split(' ')
+        ident = text[1]
+        print('Deleting tasks from ' + ident)
+        with open(FILEPATH, 'r') as f:
+            lines = f.readlines()
+            lines = [l for l in lines if l.split(' ')[0] != ident]
+            print(lines)
+        open(FILEPATH, 'w').close()
+        with open(FILEPATH, 'w') as f:
+            for l in lines:
+                f.write(l)
         ret = b''
     else:
         print('appending task ' + binary_data.decode('utf-8') + 'to file')
