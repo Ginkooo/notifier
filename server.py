@@ -4,12 +4,12 @@ import os
 import socket
 
 HOST = ''
-PORT = 8753
+PORT = 8755
 
 FILEPATH = '/home/ginko/.nots'
 
 def handle_input(binary_data):
-    text = binary_data.decode('utf-8').strip().replace('\n', '')
+    text = binary_data.decode('utf-8').strip().replace('\r', '').replace('\n', '')
     if text.startswith('GET'):
         print('getting tasks from file')
         with open(FILEPATH, 'r') as f:
@@ -34,7 +34,10 @@ while True:
     print('{} connected!'.format(addr))
     data = conn.recv(1024)
     if not data:
-        print('something wrong with data from ' + conn)
+        print('something wrong with data from ' + str(conn))
     response = handle_input(data)
-    conn.sendall(response)
+    try:
+        conn.sendall(response)
+    except:
+        pass
     conn.close()
