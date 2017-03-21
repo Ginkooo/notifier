@@ -3,7 +3,12 @@
 import os
 import socket
 
+FILEPATH = 'nots.txt'
+if not os.path.exists(FILEPATH):
+    open(FILEPATH, 'w').close()
+
 CONFIG_FILE = os.getenv('NOTIFY_CONFIG')
+
 if not CONFIG_FILE:
     print('There is no NOTIFY_CONFIG env variable')
     exit()
@@ -16,7 +21,6 @@ with open(CONFIG_FILE, 'r') as f:
         if rec[0] == 'HOST':
             HOST = rec[1]
 
-FILEPATH = '/home/ginko/.nots'
 
 def handle_input(binary_data):
     text = binary_data.decode('utf-8').strip().replace('\r', '').replace('\n', '')
@@ -34,8 +38,7 @@ def handle_input(binary_data):
         print('Deleting tasks from ' + ident)
         with open(FILEPATH, 'r') as f:
             lines = f.readlines()
-            lines = [l for l in lines if l.split(' ')[0] != ident]
-            print(lines)
+            lines = [l for l in lines if not l.startswith(ident)]
         open(FILEPATH, 'w').close()
         with open(FILEPATH, 'w') as f:
             for l in lines:
