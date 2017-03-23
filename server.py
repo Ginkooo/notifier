@@ -63,6 +63,7 @@ while True:
         print('something wrong with data from ' + str(conn))
     response = handle_input(data)
     try:
+        print('sending ' + response)
         conn.sendall(response)
     except:
         pass
