@@ -36,9 +36,7 @@ def send_and_recv(msg):
     sock = socket.socket(AF_INET, SOCK_STREAM)
     sock.connect((HOST, PORT))
     sock.sendall(msg)
-    print(msg, 'sent!')
     resp = sock.recv(1024)
-    print('got ' + resp)
     return resp
 
 

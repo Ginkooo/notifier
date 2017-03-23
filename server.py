@@ -64,7 +64,7 @@ while True:
     response = handle_input(data)
     try:
         print('sending ' + response)
-        conn.sendall(response)
+        conn.sendall(respons)
     except:
         pass
     conn.close()
