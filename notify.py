@@ -13,7 +13,7 @@ if not CONFIG_FILE:
     print('You have no NOTIFY_CONFIG env variable set')
     exit()
 
-if len(sys.argv) not in range(2, 4):
+if len(sys.argv) < 2:
     print('Too few arguments')
     exit()
 
@@ -24,8 +24,6 @@ with open(CONFIG_FILE, 'r') as f:
             PORT = int(c[1])
         if c[0] == 'HOST':
             HOST = c[1]
-
-print (HOST, PORT)
 
 def send_message(msg, host, port):
     sock = socket.socket(AF_INET, SOCK_STREAM)
@@ -40,9 +38,7 @@ def send_and_recv(msg):
     return resp
 
 
-msg = ' '.join(sys.argv[1:])
-
-print(msg)
+msg = ' '.join(sys.argv[1:]).encode('utf-8')
 
 sys.stdout.flush()
 

@@ -21,6 +21,8 @@ with open(CONFIG_FILE, 'r') as f:
         if rec[0] == 'HOST':
             HOST = rec[1]
 
+print('Starting server on {}, port {}'.format(HOST, PORT))
+
 
 def handle_input(binary_data):
     text = binary_data.decode('utf-8').strip().replace('\r', '').replace('\n', '')
