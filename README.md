@@ -18,6 +18,6 @@ Will delete all tasks
 Will delete all tasks starting with foo
 
 
-`./notify.py foobar'
+`./notify.py foobar`
 
 Will add a task named foobar
