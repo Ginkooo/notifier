@@ -1,4 +1,4 @@
-#If server reads this, it should be set to localhost, if notify cliend reads this, this should be address to the machine rrunning the server
+#If server reads this, it should be set to localhost. If notify client reads this, this should be address to the machine rrunning the server
 HOST=localhost
 
 #Port , which the server is running on
