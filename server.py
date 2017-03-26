@@ -78,6 +78,7 @@ def handle_input(binary_data):
         with open(config['NOTS_FILE'], 'a') as f:
                 f.write(text + '\n')
                 ret = b''
+    print(ret)
     return ret
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -95,8 +96,8 @@ while True:
         log('something wrong with data from ' + str(conn))
     response = handle_input(data)
     try:
-        log('sending ' + response)
-        conn.sendall(respons)
-    except:
-        pass
+        conn.sendall(response)
+        log('sending ' + response.decode('utf-8'))
+    except Exception as e:
+        log(e)
     conn.close()
