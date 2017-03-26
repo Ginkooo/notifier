@@ -1,2 +1,11 @@
+#If server reads this, it should be set to localhost, if notify cliend reads this, this should be address to the machine rrunning the server
 HOST=localhost
-PORT=8751
+
+#Port , which the server is running on
+PORT=8755
+
+#Path to file, where server should place all notifications
+NOTS_FILE=/home/ginko/notifier_files/nots.txt
+
+#Path to log file
+LOG_FILE=/home/ginko/notifier_files/log.txt
