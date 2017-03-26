@@ -1,15 +1,15 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import os
 import socket
 import re
 import datetime
 
-CONFIG_FILE = os.getenv('NOTIFY_CONFIG')
+CONFIG_FILE = '/home/pi/.config/notify/config'
 
 #Set default values
 config = {
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': 8755,
         'LOG_FILE': 'logs.txt',
         'NOTS_FILE': 'nots.txt',

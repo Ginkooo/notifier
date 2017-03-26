@@ -1,5 +1,7 @@
-#If server reads this, it should be set to localhost. If notify client reads this, this should be address to the machine rrunning the server
-HOST=localhost
+#This file can be used by notify client (Another repo) or this server, notify client would use only HOST and PORT line
+
+#If it's the server config, it should be commented or left blank, if you dont want to specify interface to use. If notify client reads this, this should be address to the machine running the server
+#HOST=192.168.1.101
 
 #Port , which the server is running on
 PORT=8755
